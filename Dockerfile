@@ -56,7 +56,7 @@ COPY nginx.sh ./
 COPY nginx.js ./nginx.tpl.js
 
 RUN touch nginx.js && \
-    chown 998 nginx.js && chmod 777 nginx.js && \
+    chown 998 nginx.js && chmod 777 nginx.js && chmod 777 nginx.sh && \
     ln -sf /kubebox/nginx.js /etc/nginx/conf.d/nginx.js
 
 EXPOSE 8080
