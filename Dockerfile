@@ -62,7 +62,7 @@ COPY nginx.conf /etc/nginx/conf.d/
 COPY nginx.sh ./
 COPY nginx.js ./nginx.tpl.js
 
-RUN touch nginx.js && \
+RUN touch nginx.js && mkdir /.kube && chmod 666 /.kube\
     chown 998 nginx.js && chmod 777 nginx.js && chmod 777 nginx.sh && \
     ln -sf /kubebox/nginx.js /etc/nginx/conf.d/nginx.js
 
