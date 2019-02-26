@@ -61,13 +61,13 @@ COPY index.html kubebox.js /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/
 COPY nginx.sh ./
 COPY nginx.js ./nginx.tpl.js
-
-RUN touch nginx.js && mkdir /.kube && chown 998 /.kube && chmod 666 /.kube && \
-    chown 998 nginx.js && chmod 777 nginx.js && chmod 777 nginx.sh && \
+# && mkdir /.kube && chown 998 /.kube && chmod 666 /.kube //chown 998 nginx.js &&
+RUN touch nginx.js  && \
+     chmod 777 nginx.js && chmod 777 nginx.sh && \
     ln -sf /kubebox/nginx.js /etc/nginx/conf.d/nginx.js
 
 EXPOSE 8080
-USER 998
+# USER 998
 ENV KUBEBOX_USE_SA_TOKEN=true
 
 CMD ["./nginx.sh"]
