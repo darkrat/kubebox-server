@@ -24,6 +24,8 @@ ENV HELM_VERSION="v2.9.1"
 RUN apk add --no-cache ca-certificates bash git curl gnupg \
     && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl \
+    && wget -q kubectl-debug https://github.com/aylei/kubectl-debug/releases/download/0.0.1/kubectl-debug_0.0.1_linux-amd64 -O /usr/local/bin/kubectl-debug \
+    && chmod +x /usr/local/bin/kubectl-debug \
     && wget -q http://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm \
     && helm init --client-only \
