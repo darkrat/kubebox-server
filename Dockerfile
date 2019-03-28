@@ -24,8 +24,6 @@ ENV HELM_VERSION="v2.9.1"
 RUN apk add --no-cache ca-certificates bash git curl gnupg \
     && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl \
-    && wget -q kubectl-debug https://github.com/aylei/kubectl-debug/releases/download/0.0.1/kubectl-debug_0.0.1_linux-amd64 -O /usr/local/bin/kubectl-debug \
-    && chmod +x /usr/local/bin/kubectl-debug \
     && wget -q http://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm \
     && helm init --client-only \
@@ -40,6 +38,8 @@ COPY --from=builder /nginx-1.13.10/objs/ngx_http_js_module.so /etc/nginx/modules
 
 COPY --from=builder /usr/bin/envsubst /usr/bin/envsubst
 
+ADD  tools/kubectl-debug_0.0.1_linux-amd64 /usr/local/bin/kubectl-debug
+RUN chmod +x /usr/local/bin/kubectl-debug 
 # Forward request and error logs to Docker log collector
 # - Change pid file location and remove nginx user
 # - Modify perms for non-root runtime
